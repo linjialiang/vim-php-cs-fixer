@@ -1,0 +1,98 @@
+*vim-php-cs-fixer*         {inheriting PHP CS Fixer for VIM editor}
+
+Supports PHP CS Fixer command execution on directories or files
+
+Note: The plug-in is implemented using `vim9script`, which requires vim9.0 or
+      above to support the plug-in.
+
+==============================================================================
+Navigation
+
+  1. Options.......................................|vim-php-cs-fixer-options|
+    1.1 PHP Path...................|phpCsFixerPhpPath|
+    1.2 php-cs-fixer Path..........|phpCsFixerPath|
+    1.3 --dry-run..................|phpCsFixerIsDryRun|
+    1.4 --verbose..................|phpCsFixerIsVerbose|
+    1.5 --rules....................|phpCsFixerRules|
+    1.6 fix cache directory........|phpCsFixerFixCacheDir|
+  2. Mappings......................................|vim-php-cs-fixer-mappings|
+    2.1.file.......................|fix-file-map|
+    2.2.directory..................|fix-directory-map|
+
+==============================================================================
+1. Options                                          *vim-php-cs-fixer-options*
+
+------------------------------------------------------------------------------
+1.1 PHP Path                                               *phpCsFixerPhpPath*
+
+Note: PHP interpreter path
+default: `'php'`
+example: `g:phpCsFixerPhpPath = '/usr/local/bin/php'`
+
+------------------------------------------------------------------------------
+1.2 php-cs-fixer Path                                         *phpCsFixerPath*
+
+Note: PHP CS Fixer path(must)
+default: `''`
+example: `g:phpCsFixerPath = '~/php-cs-fixer.phar'`
+
+------------------------------------------------------------------------------
+1.3 --dry-run                                             *phpCsFixerIsDryRun*
+
+Note: enable PHP CS Fixer option --dry-run
+default: `false`
+example: `g:phpCsFixerIsDryRun = true`
+
+------------------------------------------------------------------------------
+1.4 --verbose                                            *phpCsFixerIsVerbose*
+
+Note: enable PHP CS Fixer option --verbose
+default: `false`
+example: `g:phpCsFixerIsVerbose = true`
+
+------------------------------------------------------------------------------
+1.5 --rules                                                  *phpCsFixerRules*
+
+Note: settings PHP CS Fixer option --rules
+default: `'$PSR12'`
+example: `g:phpCsFixerRules = '@PhpCsFixer'`
+
+Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+
+------------------------------------------------------------------------------
+1.6 fix cache directory                                *phpCsFixerFixCacheDir*
+
+Note: if no cache directory is specified, only saved files can be formatted
+      (absolute path required)
+default: `null`
+example: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
+
+------------------------------------------------------------------------------
+
+==============================================================================
+2. Mappings                                        *vim-php-cs-fixer-mappings*
+
+------------------------------------------------------------------------------
+2.1 fix file map                                                *fix-file-map*
+
+key bindings: <leader>pcf
+Note: fix the directory where the current buffer file is located
+      or the label directory(php type file)
+------------------------------------------------------------------------------
+2.2 fix directory map                                      *fix-directory-map*
+
+key bindings: <leader>pcd
+Note: fix current buffer file, filetype must be php, want to support
+      empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
+------------------------------------------------------------------------------
+2.3 remap                                                              *remap*
+
+you can remap, for example:
+
+nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+------------------------------------------------------------------------------
+
+==============================================================================
+
+vim:tw=78:ts=8:noet:ft=help:norl:
