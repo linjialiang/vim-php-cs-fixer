@@ -60,12 +60,14 @@ example: `g:phpCsFixerRules = '@PhpCsFixer'`
 Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
 
 ------------------------------------------------------------------------------
-1.6 fix cache directory                                *phpCsFixerFixCacheDir*
+1.6 fix cache directory(absolute path required)        *phpCsFixerFixCacheDir*
 
-Note: if no cache directory is specified, only saved files can be formatted
-      (absolute path required)
+Note: if no |phpCsFixerFixCacheDir| is specified,
+      only saved content can be formatted
 default: `''`
 example: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
+
+Strongly recommend: setting |phpCsFixerFixCacheDir| correctly
 
 ------------------------------------------------------------------------------
 
@@ -73,17 +75,22 @@ example: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
 2. Mappings                                        *vim-php-cs-fixer-mappings*
 
 ------------------------------------------------------------------------------
-2.1 fix file map                                                *fix-file-map*
+2.1 single fix file map                                         *fix-file-map*
 
 key bindings: <leader>pcf
 Note: fix the directory where the current buffer file is located
       or the label directory(php type file)
+
 ------------------------------------------------------------------------------
 2.2 fix directory map                                      *fix-directory-map*
 
 key bindings: <leader>pcd
 Note: fix current buffer file, filetype must be php, want to support
       empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
+
+If |phpCsFixerFixCacheDir| is not set correctly, the unsaved contents of the
+buffer will not participate in the repair and will be discarded.
+
 ------------------------------------------------------------------------------
 2.3 remap                                                              *remap*
 
@@ -91,6 +98,7 @@ you can remap, for example:
 
 nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
 nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+
 ------------------------------------------------------------------------------
 
 ==============================================================================

@@ -28,25 +28,27 @@
 
 4. --verbose
 
-    - 说明: e 是否启用 PHP CS Fixer 选项 --verbose
+    - 说明: 是否启用 PHP CS Fixer 选项 `--verbose`
     - 默认值: `false`
     - 示例: `g:phpCsFixerIsVerbose = true`
 
 5. --rules
 
-    - 说明: settings PHP CS Fixer option --rules
+    - 说明: 设置 PHP CS Fixer 规则选项 `--rules`
     - 默认值: `'$PSR12'`
     - 示例: `g:phpCsFixerRules = '@PhpCsFixer'`
 
     > 常见规则组: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
 
-6. 修复缓存目录
+6. 修复缓存目录（需要绝对路径）
 
-    - 说明: 如果未指定缓存目录，则只能格式化保存的文件（需要绝对路径）
+    - 说明: 如果未指定 `phpCsFixerFixCacheDir`，则只能格式化已保存的内容
     - 默认值: `''`
     - 示例: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
 
-## 2. Mappings
+    > 强烈建议：正确设置 `phpCsFixerFixCacheDir`
+
+## 二. 映射
 
 1. 单文件修复映射
 
@@ -56,7 +58,9 @@
 2. 目录修复映射
 
     - 按键绑定: `<leader>pcd`
-    - 说明: 修复当前缓冲区文件，`filetype` 必须是 php，必须保存，缓冲区文件为空要想支持缓冲区修复，需要手动设置|phpCsFixerFixCacheDir|
+    - 说明: 修复当前缓冲区文件，`filetype` 必须是 php
+
+    > 假如未正确设置 `phpCsFixerFixCacheDir` ，缓冲区未保存内容将无法参与修复，并且会被丢弃。
 
 3. 重新映射
 

@@ -40,15 +40,17 @@ Supports PHP CS Fixer command execution on directories or files
 
     > Common Rule Group: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
 
-6. fix cache directory
+6. fix cache directory(absolute path required)
 
-    - Note: if no cache directory is specified, only saved files can be formatted (absolute path required)
+    - Note: if no `phpCsFixerFixCacheDir` is specified, only saved content can be formatted
     - default: `''`
     - example: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
 
+    > Strongly recommend: setting `phpCsFixerFixCacheDir` correctly
+
 ## 2. Mappings
 
-1. fix file map
+1. single fix file map
 
     - key bindings: `<leader>pcf`
     - Note: fix the directory where the current buffer file is located
@@ -59,6 +61,8 @@ Supports PHP CS Fixer command execution on directories or files
     - key bindings: `<leader>pcd`
     - Note: fix current buffer file, filetype must be php, want to support
       empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
+
+    If `phpCsFixerFixCacheDir` is not set correctly, the unsaved contents of the buffer will not participate in the repair and will be discarded.
 
 3. remap
 
