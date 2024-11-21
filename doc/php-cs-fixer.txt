@@ -1,4 +1,4 @@
-*vim-php-cs-fixer*         {inheriting PHP CS Fixer for VIM editor}
+*vim-php-cs-fixer*         {integrated PHP CS Fixer for VIM editor}
 
 Supports PHP CS Fixer command execution on directories or files
 
@@ -64,7 +64,7 @@ Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
 
 Note: if no cache directory is specified, only saved files can be formatted
       (absolute path required)
-default: `null`
+default: `''`
 example: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
 
 ------------------------------------------------------------------------------
