@@ -1,5 +1,7 @@
 # vim-php-cs-fixer
 
+[中文文档入口](./readme-cn.md)
+
 inheriting PHP CS Fixer for VIM editor
 
 Supports PHP CS Fixer command execution on directories or files
@@ -19,6 +21,8 @@ Supports PHP CS Fixer command execution on directories or files
     - Note: PHP CS Fixer path(must)
     - default: `''`
     - example: `g:phpCsFixerPath = '~/php-cs-fixer.phar'`
+
+    > Download [PHP CS Fixer](https://cs.symfony.com/)
 
 3. --dry-run
 

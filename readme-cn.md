@@ -20,6 +20,8 @@
     - 默认值: `''`
     - 示例: `g:phpCsFixerPath = '~/php-cs-fixer.phar'`
 
+    > 下载 [PHP CS Fixer](https://cs.symfony.com/)
+
 3. --dry-run
 
     - 说明: 是否启用 PHP CS Fixer 选项 `--dry-run`
