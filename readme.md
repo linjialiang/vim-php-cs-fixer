@@ -108,3 +108,8 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
     nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
     nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     ```
+
+> source address：
+
+-   GitHub: https://github.com/linjialiang/vim-php-cs-fixer.git
+-   Gitee: https://gitee.com/linjialiang/vim-php-cs-fixer
