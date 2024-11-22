@@ -13,6 +13,7 @@ Supports PHP CS Fixer command execution on directories or files
 on `.vimrc` you can configure this:
 
 ```vim
+vim9script
 # php interpreter path(default: 'php')
 g:phpCsFixerPhpPath = $HOME .. '\php'
 
