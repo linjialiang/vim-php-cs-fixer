@@ -2,7 +2,7 @@
 
 [中文文档入口](./readme-cn.md)
 
-integrated PHP CS Fixer for VIM editor
+Integration of PHP CS Fixer on Vim Editor
 
 Supports PHP CS Fixer command execution on directories or files
 

@@ -1,6 +1,6 @@
 # vim-php-cs-fixer
 
-为 Vim 编辑器集成 PHP CS Fixer
+在 Vim 编辑器上集成 PHP CS Fixer
 
 支持在目录或文件上执行 PHP CS Fixer 命令
 
