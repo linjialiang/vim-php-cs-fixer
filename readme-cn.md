@@ -10,7 +10,7 @@
 
 在 `.vimrc` 上你可以这样配置：
 
-```vim
+```vim9script
 # php解释器路径(默认: 'php')
 g:phpCsFixerPhpPath = $HOME .. '\php'
 
@@ -100,7 +100,7 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
     你可以重新映射, 例如:
 
-    ```vim
+    ```vim9script
     nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
     nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     ```
