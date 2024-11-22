@@ -8,6 +8,38 @@ Supports PHP CS Fixer command execution on directories or files
 
 > Note: The plug-in is implemented using `vim9script`, which requires vim9.0 or above to support the plug-in.
 
+## example
+
+on `.vimrc` you can configure this:
+
+```vim
+# php interpreter path(default: 'php')
+g:phpCsFixerPhpPath = $HOME .. '\php'
+
+# php-cs-fixer file path(must)
+# download: https://cs.symfony.com/
+g:phpCsFixerPath = $HOME .. '\php-cs-fixer-v3.phar'
+
+# --dry-run option(default: false)
+# g:phpCsFixerIsDryRun = true
+
+# --verbose option(default: false)
+# g:phpCsFixerIsVerbose = true
+
+# apply rules, content consistent with PHP CS Fixer --rules option
+# Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+# default: '@PSR12'
+g:phpCsFixerRules = '@PhpCsFixer'
+
+# temporary file storage directory while repairing
+# Warning: if not set correctly, you will not be able to repair content that is not saved to a file
+g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
+
+# remap
+# nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+# nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+```
+
 ## 1. Options
 
 1. PHP Path
@@ -44,7 +76,7 @@ Supports PHP CS Fixer command execution on directories or files
 
     > Common Rule Group: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
 
-6. fix cache directory(absolute path required)
+6. temporary file storage directory(absolute path required)
 
     - Note: if no `phpCsFixerFixCacheDir` is specified, only saved content can be formatted
     - default: `''`
@@ -70,9 +102,9 @@ Supports PHP CS Fixer command execution on directories or files
 
 3. remap
 
-you can remap, for example:
+    you can remap, for example:
 
-```vim
-nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
-nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
-```
+    ```vim
+    nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+    nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+    ```

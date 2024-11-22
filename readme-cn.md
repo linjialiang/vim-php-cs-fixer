@@ -6,6 +6,38 @@
 
 > **Note:** 插件使用 `vim9script` 脚本语言实现，需要 `vim9.0` 以上版本
 
+## 示例
+
+在 `.vimrc` 上你可以这样配置：
+
+```vim
+# php解释器路径(默认: 'php')
+g:phpCsFixerPhpPath = $HOME .. '\php'
+
+# php-cs-fixer 文件路径(必须)
+# 官网下载: https://cs.symfony.com/
+g:phpCsFixerPath = $HOME .. '\php-cs-fixer-v3.phar'
+
+# --dry-run 选项(默认: false)
+# g:phpCsFixerIsDryRun = true
+
+# --verbose 选项(默认: false)
+# g:phpCsFixerIsVerbose = true
+
+# 应用规则，内容跟 PHP CS Fixer 的 --rules 选项保持一致
+# 常见规则组 @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+# 默认: '@PSR12'
+g:phpCsFixerRules = '@PhpCsFixer'
+
+# 临时文件存储目录
+# 警告: 未正确设置，将不能修复未保存到文件的内容
+g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
+
+# 重新映射
+# nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+# nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+```
+
 ## 一、 选项
 
 1. PHP Path
@@ -42,7 +74,7 @@
 
     > 常见规则组: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
 
-6. 修复缓存目录（需要绝对路径）
+6. 临时文件存储目录（需要绝对路径）
 
     - 说明: 如果未指定 `phpCsFixerFixCacheDir`，则只能格式化已保存的内容
     - 默认值: `''`
@@ -66,9 +98,9 @@
 
 3. 重新映射
 
-你可以重新映射, 例如:
+    你可以重新映射, 例如:
 
-```vim
-nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
-nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
-```
+    ```vim
+    nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+    nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+    ```

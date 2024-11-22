@@ -60,7 +60,7 @@ example: `g:phpCsFixerRules = '@PhpCsFixer'`
 Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
 
 ------------------------------------------------------------------------------
-1.6 fix cache directory(absolute path required)        *phpCsFixerFixCacheDir*
+1.6 temporary file storage directory(absolute path required)        *phpCsFixerFixCacheDir*
 
 Note: if no |phpCsFixerFixCacheDir| is specified,
       only saved content can be formatted
