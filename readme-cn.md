@@ -10,7 +10,8 @@
 
 在 `.vimrc` 上你可以这样配置：
 
-```vim9script
+```vim
+vim9script
 # php解释器路径(默认: 'php')
 g:phpCsFixerPhpPath = $HOME .. '\php'
 
