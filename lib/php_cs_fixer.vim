@@ -7,16 +7,16 @@ var phpPath: string = get(g:, 'phpCsFixerPhpPath', 'php')
 var csIsVerbose: bool = get(g:, 'phpCsFixerIsVerbose', false)
 var csRules: string = get(g:, 'phpCsFixerRules', '@PSR12')
 var isDryRun: bool = get(g:, 'phpCsFixerIsDryRun', false)
-var csFixCacheDir: string = get(
-  g:,
-  'phpCsFixerFixCacheDir',
-  expand(expand('<script>:h:h') .. '/temp')
-)
+var csFixCacheDir: string = get(g:, 'phpCsFixerFixCacheDir', '')
 
 # 检测并创建缓存临时目录
-def CheckAndCreateCacheDir(dirPath: string)
-  if !isdirectory(dirPath)
-    mkdir(dirPath, 'p')
+def CheckAndCreateCacheDir()
+  if csFixCacheDir == ''
+    csFixCacheDir = expand(expand('<script>:h:h') .. '/temp')
+  endif
+
+  if !isdirectory(csFixCacheDir)
+    mkdir(csFixCacheDir, 'p')
   endif
 enddef
 
@@ -116,12 +116,8 @@ export def FixFile()
   # 检测文件类型是否为php
   if &filetype != 'php'
     echohl Error | echo 'filetype must be php'
-  # elseif csFixCacheDir == ''
-  #   # 先保存文件
-  #   execute 'silent write'
-  #   Fix(expand('%:p'), isDryRun)
   else
-    CheckAndCreateCacheDir(csFixCacheDir)
+    CheckAndCreateCacheDir()
     # 当前缓冲区是否打开了文件
     var isOpenFile: bool = !empty(bufname('%'))
     # 先将缓冲区内容保存至其他文件
