@@ -85,6 +85,19 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
 ## 二. 映射
 
+默认没有按键映射，需要在 `.vimrc` 手动配置，下面是个简单的示例：
+
+```vim
+# .vimrc
+if !hasmapto('<Plug>PhpCsFixerFixFile;')
+  nnoremap <unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
+endif
+
+if !hasmapto('<Plug>PhpCsFixerFixDir;')
+  nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
+endif
+```
+
 1. 单文件修复映射
 
     - 按键绑定: `<leader>pcf`
@@ -97,13 +110,20 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
     > 假如未正确设置 `phpCsFixerFixCacheDir` ，缓冲区未保存内容将无法参与修复，并且会被丢弃。
 
-3. 重新映射
+3. 更好的映射
 
-    你可以重新映射, 例如:
+    如果你有多个代码格式化工具，可以参考这种方式来写
 
-    ```vim9script
-    nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
-    nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+    ```vim
+    def RunFormat
+        var fileType: string = &filetype
+        if fileType == 'php'
+
+    enddef
+    nnoremap <Leader>f RunFormat()
+    if !hasmapto('<Plug>PhpCsFixerFixDir;')
+      nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
+    endif
     ```
 
 > 项目地址：
