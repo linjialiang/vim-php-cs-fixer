@@ -90,16 +90,16 @@ example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
 3. Mappings                                        *vim-php-cs-fixer-mappings*
 
 ------------------------------------------------------------------------------
-3.1 single fix file map                                         *fix-file-map*
+3.1 single fix file map                                      *phpCsFixFileMap*
 
-key bindings: <leader>pcf
+key bindings: `<leader>pcf`
 Note: fix the directory where the current buffer file is located
       or the label directory(php type file)
 
 ------------------------------------------------------------------------------
-3.2 fix directory map                                      *fix-directory-map*
+3.2 fix directory map                                   *phpCsFixDirectoryMap*
 
-key bindings: <leader>pcd
+key bindings: `<leader>pcd`
 Note: fix current buffer file, filetype must be php, want to support
       empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
 
@@ -107,12 +107,12 @@ If |phpCsFixerFixCacheDir| is not set correctly, the unsaved contents of the
 buffer will not participate in the repair and will be discarded.
 
 ------------------------------------------------------------------------------
-3.3 remap                                                          *fix-remap*
+3.3 remap                                                      *phpCsFixRemap*
 
 you can remap, for example:
 
-nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
-nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+`nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;`
+`nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;`
 
 Better mapping, if you have multiple code formatting tools, you can refer to
       this way to write:
