@@ -9,22 +9,22 @@ g:loaded_phpCsFixer = true
 
 import autoload '../lib/php_cs_fixer.vim' as that
 
-def FixDir()
+def g:PhpCsFixerFixDir()
   that.FixDir()
 enddef
 
-def FixFile()
+def g:PhpCsFixerFixFile()
   that.FixFile()
 enddef
 
-# if !hasmapto('<Plug>PhpCsFixerFixFile;')
-  # nnoremap <unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
-# endif
+if !hasmapto('<Plug>PhpCsFixerFixFile;')
+  nnoremap <unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
+endif
 nnoremap <unique><script><Plug>PhpCsFixerFixFile; <SID>FixFile
-nnoremap <SID>FixFile :call <SID>FixFile()<CR>
+nnoremap <SID>FixFile :call <SID>that.FixFile()<CR>
 
-# if !hasmapto('<Plug>PhpCsFixerFixDir;')
-  # nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
-# endif
+if !hasmapto('<Plug>PhpCsFixerFixDir;')
+  nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
+endif
 nnoremap <unique><script><Plug>PhpCsFixerFixDir; <SID>FixDir
-nnoremap <SID>FixDir :call <SID>FixDir()<CR>
+nnoremap <SID>FixDir :call <SID>that.FixDir()<CR>

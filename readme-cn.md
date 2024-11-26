@@ -13,11 +13,12 @@
 ```vim
 vim9script
 # php解释器路径(默认: 'php')
-g:phpCsFixerPhpPath = $HOME .. '\php'
+# php解释器所在目录加入环境变量后，无需设置此项
+g:phpCsFixerPhpPath = expand('~/php')
 
 # php-cs-fixer 文件路径(必须)
 # 官网下载: https://cs.symfony.com/
-g:phpCsFixerPath = $HOME .. '\php-cs-fixer-v3.phar'
+g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
 
 # --dry-run 选项(默认: false)
 # g:phpCsFixerIsDryRun = true
@@ -30,13 +31,12 @@ g:phpCsFixerPath = $HOME .. '\php-cs-fixer-v3.phar'
 # 默认: '@PSR12'
 g:phpCsFixerRules = '@PhpCsFixer'
 
-# 临时文件存储目录
-# 警告: 未正确设置，将不能修复未保存到文件的内容
-g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
+# 临时文件存储目录，默认: vim-php-cs-fixer 插件的子目录 temp
+# g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')
 
-# 重新映射
-# nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
-# nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+# 简单的映射
+nnoremap <unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
+nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
 ```
 
 ## 一、 选项
@@ -51,7 +51,7 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
     - 说明: 必须
     - 默认值: `''`
-    - 示例: `g:phpCsFixerPath = '~/php-cs-fixer.phar'`
+    - 示例: `g:phpCsFixerPath = 'expadn(~/php-cs-fixer.phar')`
 
     > 下载 [PHP CS Fixer](https://cs.symfony.com/)
 
@@ -77,9 +77,8 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
 6. 临时文件存储目录（需要绝对路径）
 
-    - 说明: 如果未指定 `phpCsFixerFixCacheDir`，则只能格式化已保存的内容
-    - 默认值: `''`
-    - 示例: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
+    - 默认值: vim-php-cs-fixer 插件子目录 temp 的路径
+    - 示例: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
 
     > 强烈建议：正确设置 `phpCsFixerFixCacheDir`
 
@@ -89,13 +88,9 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
 ```vim
 # .vimrc
-if !hasmapto('<Plug>PhpCsFixerFixFile;')
-  nnoremap <unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
-endif
 
-if !hasmapto('<Plug>PhpCsFixerFixDir;')
-  nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
-endif
+<unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
+<unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
 ```
 
 1. 单文件修复映射
@@ -103,27 +98,33 @@ endif
     - 按键绑定: `<leader>pcf`
     - 说明: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
 
+    > 假如 `phpCsFixerFixCacheDir` 设置路径异常，单文件修复会失败
+
 2. 目录修复映射
 
     - 按键绑定: `<leader>pcd`
     - 说明: 修复当前缓冲区文件，`filetype` 必须是 php
-
-    > 假如未正确设置 `phpCsFixerFixCacheDir` ，缓冲区未保存内容将无法参与修复，并且会被丢弃。
 
 3. 更好的映射
 
     如果你有多个代码格式化工具，可以参考这种方式来写
 
     ```vim
-    def RunFormat
-        var fileType: string = &filetype
-        if fileType == 'php'
-
+    def RunFormat()
+        var filetype: string = &filetype
+        if filetype == 'php'
+            :call g:PhpCsFixerFixFiler()<CR>
+        else
+            # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
+            var filetypes = ['javascript', 'typescript', 'json', 'css', 'html', 'markdown']
+            if indexof(filetypes, filetype) != -1
+                g:Prettier
+            endif
+        endif
     enddef
+
     nnoremap <Leader>f RunFormat()
-    if !hasmapto('<Plug>PhpCsFixerFixDir;')
-      nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
-    endif
+    nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
     ```
 
 > 项目地址：
