@@ -109,28 +109,25 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     ```
 
-    > 更好的映射，如果你有多个代码格式化工具，可以参考这种方式来写
+    > Better mapping, if you have multiple code formatting tools, you can refer to this way to write
 
     ```vim
     vim9script
     def g:RunCodeFormat()
-        # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
+        # Prettier supports many file types, here you can add or delete file types
         var prettierSupportTypes = [
-        'javascript',
-        'typescript',
-        'json',
-        'markdown',
-        'css',
-        'html'
+            'javascript',
+            'typescript',
+            'json',
+            'markdown',
+            'css',
+            'html'
         ]
         var currentFiletype = &filetype
         if currentFiletype == 'php'
-        execute 'call PhpCsFixerFixFile()'
+            execute 'call PhpCsFixerFixFile()'
         elseif prettierSupportTypes->index(currentFiletype) != -1
-        # echo fileTypes->index(currentFiletype)
-        # echo fileTypes->count(currentFiletype)
-        # echo fileTypes->indexof($"v:val == '{currentFiletype}'")
-        execute 'Prettier'
+            execute 'Prettier'
         endif
     enddef
 

@@ -113,21 +113,21 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     ```vim
     vim9script
     def g:RunCodeFormat()
-      # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
-      var prettierSupportTypes = [
-        'javascript',
-        'typescript',
-        'json',
-        'markdown',
-        'css',
-        'html'
-      ]
-      var currentFiletype = &filetype
-      if currentFiletype == 'php'
-        execute 'call PhpCsFixerFixFile()'
-      elseif prettierSupportTypes->index(currentFiletype) != -1
-        execute 'Prettier'
-      endif
+        # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
+        var prettierSupportTypes = [
+            'javascript',
+            'typescript',
+            'json',
+            'markdown',
+            'css',
+            'html'
+        ]
+        var currentFiletype = &filetype
+        if currentFiletype == 'php'
+            execute 'call PhpCsFixerFixFile()'
+        elseif prettierSupportTypes->index(currentFiletype) != -1
+            execute 'Prettier'
+        endif
     enddef
 
     nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
