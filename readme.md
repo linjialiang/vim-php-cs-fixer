@@ -79,7 +79,7 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 6. temporary file storage directory(absolute path required)
 
     - default: vim-php-cs-fixer path to temp plugin subdirectory
-    - example: `expand('~/.php-cs-fixer/vim-fix-cache')`
+    - example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
 
 ## 2. global function
 
