@@ -80,8 +80,6 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     - 默认值: vim-php-cs-fixer 插件子目录 temp 的路径
     - 示例: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
 
-    > 强烈建议：正确设置 `phpCsFixerFixCacheDir`
-
 ## 二、全局函数
 
 1. 单文件修复函数: `g:PhpCsFixerFixFile()`
@@ -89,21 +87,28 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 
 ## 三. 映射
 
-1. 单文件修复映射
+1.  单文件修复映射
 
-    - 按键绑定: `<leader>pcf`
-    - 说明: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
+    -   按键绑定: `<leader>pcf`
+    -   说明: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
 
     > 假如 `phpCsFixerFixCacheDir` 设置路径异常，单文件修复会失败
 
-2. 目录修复映射
+2.  目录修复映射
 
-    - 按键绑定: `<leader>pcd`
-    - 说明: 修复当前缓冲区文件，`filetype` 必须是 php
+    -   按键绑定: `<leader>pcd`
+    -   说明: 修复当前缓冲区文件，`filetype` 必须是 php
 
-3. 更好的映射
+3.  重新映射
 
-    如果你有多个代码格式化工具，可以参考这种方式来写
+    这是一个简单的重新映射示例：
+
+    ```vim
+    nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+    nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+    ```
+
+    > 更好的映射，如果你有多个代码格式化工具，可以参考下面这种方式：
 
     ```vim
     vim9script
@@ -121,9 +126,6 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
       if currentFiletype == 'php'
         execute 'call PhpCsFixerFixFile()'
       elseif prettierSupportTypes->index(currentFiletype) != -1
-        # echo fileTypes->index(currentFiletype)
-        # echo fileTypes->count(currentFiletype)
-        # echo fileTypes->indexof($"v:val == '{currentFiletype}'")
         execute 'Prettier'
       endif
     enddef
@@ -131,7 +133,7 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
     ```
 
-> 项目地址：
+## 项目地址：
 
 -   GitHub: https://github.com/linjialiang/vim-php-cs-fixer.git
 -   Gitee: https://gitee.com/linjialiang/vim-php-cs-fixer

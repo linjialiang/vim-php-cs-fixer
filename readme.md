@@ -15,11 +15,11 @@ on `.vimrc` you can configure this:
 ```vim
 vim9script
 # php interpreter path(default: 'php')
-g:phpCsFixerPhpPath = $HOME .. '\php'
+g:phpCsFixerPhpPath = expand('~/php')
 
 # php-cs-fixer file path(must)
 # download: https://cs.symfony.com/
-g:phpCsFixerPath = $HOME .. '\php-cs-fixer-v3.phar'
+g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
 
 # --dry-run option(default: false)
 # g:phpCsFixerIsDryRun = true
@@ -33,12 +33,11 @@ g:phpCsFixerPath = $HOME .. '\php-cs-fixer-v3.phar'
 g:phpCsFixerRules = '@PhpCsFixer'
 
 # temporary file storage directory while repairing
-# Warning: if not set correctly, you will not be able to repair content that is not saved to a file
-g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
+g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')
 
 # remap
-# nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
-# nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 ```
 
 ## 1. Options
@@ -47,13 +46,13 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
     - Note: PHP interpreter path
     - default: `'php'`
-    - example: `g:phpCsFixerPhpPath = '/usr/local/bin/php'`
+    - example: `g:phpCsFixerPhpPath = expand('~/php')`
 
 2. php-cs-fixer Path
 
     - Note: PHP CS Fixer path(must)
     - default: `''`
-    - example: `g:phpCsFixerPath = '~/php-cs-fixer.phar'`
+    - example: `g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')`
 
     > Download [PHP CS Fixer](https://cs.symfony.com/)
 
@@ -79,29 +78,29 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
 
 6. temporary file storage directory(absolute path required)
 
-    - Note: if no `phpCsFixerFixCacheDir` is specified, only saved content can be formatted
-    - default: `''`
-    - example: `g:phpCsFixerFixCacheDir = $HOME .. '/.php-cs-fixer/vim-fix-cache'`
+    - default: vim-php-cs-fixer path to temp plugin subdirectory
+    - example: `expand('~/.php-cs-fixer/vim-fix-cache')`
 
-    > Strongly recommend: setting `phpCsFixerFixCacheDir` correctly
+## 2. global function
 
-## 2. Mappings
+1. single file fix function: `g:PhpCsFixerFixFile()`
+2. directory fix function: `g:PhpCsFixerFixDir()`
 
-1. single fix file map
+## 3. Mappings
 
-    - key bindings: `<leader>pcf`
-    - Note: fix the directory where the current buffer file is located
-      or the label directory(php type file)
+1.  single fix file map
 
-2. fix directory map
+    -   key bindings: `<leader>pcf`
+    -   Note: fix the directory where the current buffer file is located
+        or the label directory(php type file)
 
-    - key bindings: `<leader>pcd`
-    - Note: fix current buffer file, filetype must be php, want to support
-      empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
+2.  fix directory map
 
-    If `phpCsFixerFixCacheDir` is not set correctly, the unsaved contents of the buffer will not participate in the repair and will be discarded.
+    -   key bindings: `<leader>pcd`
+    -   Note: fix current buffer file, filetype must be php, want to support
+        empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
 
-3. remap
+3.  remap
 
     you can remap, for example:
 
@@ -110,7 +109,35 @@ g:phpCsFixerFixCacheDir = $HOME .. '\.php-cs-fixer\vim-fix-cache'
     nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     ```
 
-> source address：
+    > 更好的映射，如果你有多个代码格式化工具，可以参考这种方式来写
+
+    ```vim
+    vim9script
+    def g:RunCodeFormat()
+        # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
+        var prettierSupportTypes = [
+        'javascript',
+        'typescript',
+        'json',
+        'markdown',
+        'css',
+        'html'
+        ]
+        var currentFiletype = &filetype
+        if currentFiletype == 'php'
+        execute 'call PhpCsFixerFixFile()'
+        elseif prettierSupportTypes->index(currentFiletype) != -1
+        # echo fileTypes->index(currentFiletype)
+        # echo fileTypes->count(currentFiletype)
+        # echo fileTypes->indexof($"v:val == '{currentFiletype}'")
+        execute 'Prettier'
+        endif
+    enddef
+
+    nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
+    ```
+
+## source address：
 
 -   GitHub: https://github.com/linjialiang/vim-php-cs-fixer.git
 -   Gitee: https://gitee.com/linjialiang/vim-php-cs-fixer
