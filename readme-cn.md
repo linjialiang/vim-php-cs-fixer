@@ -34,9 +34,9 @@ g:phpCsFixerRules = '@PhpCsFixer'
 # 临时文件存储目录，默认: vim-php-cs-fixer 插件的子目录 temp
 # g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')
 
-# 简单的映射
-nnoremap <unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
-nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
+# 重新映射
+nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 ```
 
 ## 一、 选项
@@ -82,16 +82,12 @@ nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
 
     > 强烈建议：正确设置 `phpCsFixerFixCacheDir`
 
-## 二. 映射
+## 二、全局函数
 
-默认没有按键映射，需要在 `.vimrc` 手动配置，下面是个简单的示例：
+1. 单文件修复函数: `g:PhpCsFixerFixFile()`
+2. 目录修复函数: `g:PhpCsFixerFixDir()`
 
-```vim
-# .vimrc
-
-<unique><silent><Leader>pcf <Plug>PhpCsFixerFixFile;
-<unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
-```
+## 三. 映射
 
 1. 单文件修复映射
 
@@ -110,21 +106,29 @@ nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
     如果你有多个代码格式化工具，可以参考这种方式来写
 
     ```vim
-    def RunFormat()
-        var filetype: string = &filetype
-        if filetype == 'php'
-            :call g:PhpCsFixerFixFiler()<CR>
-        else
-            # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
-            var filetypes = ['javascript', 'typescript', 'json', 'css', 'html', 'markdown']
-            if indexof(filetypes, filetype) != -1
-                g:Prettier
-            endif
-        endif
+    vim9script
+    def g:RunCodeFormat()
+      # prettier 支持的文件类型有很多，这里你可以自行增减文件类型
+      var prettierSupportTypes = [
+        'javascript',
+        'typescript',
+        'json',
+        'markdown',
+        'css',
+        'html'
+      ]
+      var currentFiletype = &filetype
+      if currentFiletype == 'php'
+        execute 'call PhpCsFixerFixFile()'
+      elseif prettierSupportTypes->index(currentFiletype) != -1
+        # echo fileTypes->index(currentFiletype)
+        # echo fileTypes->count(currentFiletype)
+        # echo fileTypes->indexof($"v:val == '{currentFiletype}'")
+        execute 'Prettier'
+      endif
     enddef
 
-    nnoremap <Leader>f RunFormat()
-    nnoremap <unique><silent><Leader>pcd <Plug>PhpCsFixerFixDir;
+    nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
     ```
 
 > 项目地址：
