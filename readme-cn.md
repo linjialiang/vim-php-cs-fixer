@@ -90,14 +90,14 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 1.  单文件修复映射
 
     -   按键绑定: `<leader>pcf`
-    -   说明: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
+    -   说明: 修复当前缓冲区文件，`filetype` 必须是 php
 
     > 假如 `phpCsFixerFixCacheDir` 设置路径异常，单文件修复会失败
 
 2.  目录修复映射
 
     -   按键绑定: `<leader>pcd`
-    -   说明: 修复当前缓冲区文件，`filetype` 必须是 php
+    -   说明: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
 
 3.  重新映射
 

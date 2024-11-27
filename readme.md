@@ -91,14 +91,13 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 1.  single fix file map
 
     -   key bindings: `<leader>pcf`
-    -   Note: fix the directory where the current buffer file is located
-        or the label directory(php type file)
+    -   Note: fix current buffer file, filetype must be php.
 
 2.  fix directory map
 
     -   key bindings: `<leader>pcd`
-    -   Note: fix current buffer file, filetype must be php, want to support
-        empty buffer fix, you need to manually set |phpCsFixerFixCacheDir|
+    -   Note: fix the directory where the current buffer file is located
+        or the label directory(php type file)
 
 3.  remap
 
