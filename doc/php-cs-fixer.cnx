@@ -1,0 +1,137 @@
+*vim-php-cs-fixer*         {在 Vim 编辑器上集成 PHP CS Fixer}
+
+支持在目录或文件上执行 PHP CS Fixer 命令
+
+Note: 插件使用 `vim9script` 脚本语言实现，需要 `vim9.0` 以上版本
+
+==============================================================================
+导航
+
+  1. Options........................................|vim-php-cs-fixer-options|
+    1.1 PHP Path...................|phpCsFixerPhpPath|
+    1.2 php-cs-fixer Path..........|phpCsFixerPath|
+    1.3 --dry-run..................|phpCsFixerIsDryRun|
+    1.4 --verbose..................|phpCsFixerIsVerbose|
+    1.5 --rules....................|phpCsFixerRules|
+    1.6 fix cache directory........|phpCsFixerFixCacheDir|
+  2. global function...............................|vim-php-cs-fixer-def|
+    2.1.file.......................|PhpCsFixerFixFile|
+    2.2.directory..................|PhpCsFixerFixDir|
+  3. Mappings......................................|vim-php-cs-fixer-mappings|
+    3.1.file.......................|phpCsFixFileMap|
+    3.2.directory..................|phpCsFixDirectoryMap|
+    3.3.remap......................|phpCsFixRemap|
+
+==============================================================================
+1. Options                                          *vim-php-cs-fixer-options*
+
+------------------------------------------------------------------------------
+1.1 PHP Path                                               *phpCsFixerPhpPath*
+
+Note: PHP 解释器路径
+default: `'php'`
+example: `g:phpCsFixerPhpPath = expand('~/php')`
+
+------------------------------------------------------------------------------
+1.2 php-cs-fixer Path                                         *phpCsFixerPath*
+
+Note: PHP CS Fixer 路径(必填项)
+default: `''`
+example: `g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')`
+
+------------------------------------------------------------------------------
+1.3 --dry-run                                             *phpCsFixerIsDryRun*
+
+Note: PHP CS Fixer 是否启用 --dry-run 选项
+default: `false`
+example: `g:phpCsFixerIsDryRun = true`
+
+------------------------------------------------------------------------------
+1.4 --verbose                                            *phpCsFixerIsVerbose*
+
+Note: PHP CS Fixer 是否启用 --verbose 选项
+default: `false`
+example: `g:phpCsFixerIsVerbose = true`
+
+------------------------------------------------------------------------------
+1.5 --rules                                                  *phpCsFixerRules*
+
+Note: PHP CS Fixer 设置 --rules 规则选项
+default: `'$PSR12'`
+example: `g:phpCsFixerRules = '@PhpCsFixer'`
+
+常见规则组: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+
+------------------------------------------------------------------------------
+1.6 临时文件存储目录                                   *phpCsFixerFixCacheDir*
+
+default: vim-php-cs-fixer 插件子目录 temp 的路径
+example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
+
+------------------------------------------------------------------------------
+
+==============================================================================
+2. global function                                      *vim-php-cs-fixer-def*
+
+------------------------------------------------------------------------------
+2.1 单文件修复函数                                          *PhpCsFixerFixFile*
+
+`g:PhpCsFixerFixFile()`
+
+------------------------------------------------------------------------------
+2.2 目录修复函数                                             *PhpCsFixerFixDir*
+
+`g:PhpCsFixerFixDir()`
+
+------------------------------------------------------------------------------
+
+==============================================================================
+3. Mappings                                        *vim-php-cs-fixer-mappings*
+
+------------------------------------------------------------------------------
+3.1 单文件修复映射                                            *phpCsFixFileMap*
+
+key bindings: `<leader>pcf`
+Note: 修复当前缓冲区文件，`filetype` 必须是 php
+
+------------------------------------------------------------------------------
+3.2 fix directory map                                   *phpCsFixDirectoryMap*
+
+key bindings: `<leader>pcd`
+Note: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
+
+------------------------------------------------------------------------------
+3.3 remap                                                      *phpCsFixRemap*
+
+这是一个简单的重新映射示例：
+
+`nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;`
+`nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;`
+
+更好的映射，如果你有多个代码格式化工具，可以参考下面这种方式：
+
+def g:RunCodeFormat()
+  # Prettier supports many file types, here you can add or delete file types
+  var prettierSupportTypes = [
+    'javascript',
+    'typescript',
+    'json',
+    'markdown',
+    'css',
+    'html'
+  ]
+  var currentFiletype = &filetype
+  if currentFiletype == 'php'
+    execute 'call PhpCsFixerFixFile()'
+  elseif prettierSupportTypes->index(currentFiletype) != -1
+    execute 'Prettier'
+  endif
+enddef
+
+nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
+
+------------------------------------------------------------------------------
+
+==============================================================================
+
+vim:tw=78:ts=8:noet:ft=help:norl:
