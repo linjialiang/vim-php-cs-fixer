@@ -7,33 +7,33 @@ Note: 插件使用 `vim9script` 脚本语言实现，需要 `vim9.0` 以上版�
 ==============================================================================
 导航
 
-  1. Options........................................|vim-php-cs-fixer-options|
-    1.1 PHP Path...................|phpCsFixerPhpPath|
-    1.2 php-cs-fixer Path..........|phpCsFixerPath|
+  1. 选项...........................................|vim-php-cs-fixer-options|
+    1.1 PHP 路径...................|phpCsFixerPhpPath|
+    1.2 php-cs-fixer 路径..........|phpCsFixerPath|
     1.3 --dry-run..................|phpCsFixerIsDryRun|
     1.4 --verbose..................|phpCsFixerIsVerbose|
     1.5 --rules....................|phpCsFixerRules|
-    1.6 fix cache directory........|phpCsFixerFixCacheDir|
-  2. global function...............................|vim-php-cs-fixer-def|
-    2.1.file.......................|PhpCsFixerFixFile|
-    2.2.directory..................|PhpCsFixerFixDir|
-  3. Mappings......................................|vim-php-cs-fixer-mappings|
-    3.1.file.......................|phpCsFixFileMap|
-    3.2.directory..................|phpCsFixDirectoryMap|
-    3.3.remap......................|phpCsFixRemap|
+    1.6 临时文件存储目录.............|phpCsFixerFixCacheDir|
+  2. 全局函数........................................|vim-php-cs-fixer-def|
+    2.1.文件.......................|PhpCsFixerFixFile|
+    2.2.目录..................|PhpCsFixerFixDir|
+  3. 映射.........................................|vim-php-cs-fixer-mappings|
+    3.1.文件.......................|phpCsFixFileMap|
+    3.2.目录......................|phpCsFixDirectoryMap|
+    3.3.重新映射...................|phpCsFixRemap|
 
 ==============================================================================
-1. Options                                          *vim-php-cs-fixer-options*
+1. 选项                                             *vim-php-cs-fixer-options*
 
 ------------------------------------------------------------------------------
-1.1 PHP Path                                               *phpCsFixerPhpPath*
+1.1 PHP 路径                                               *phpCsFixerPhpPath*
 
 Note: PHP 解释器路径
 default: `'php'`
 example: `g:phpCsFixerPhpPath = expand('~/php')`
 
 ------------------------------------------------------------------------------
-1.2 php-cs-fixer Path                                         *phpCsFixerPath*
+1.2 php-cs-fixer 路径                                         *phpCsFixerPath*
 
 Note: PHP CS Fixer 路径(必填项)
 default: `''`
@@ -71,7 +71,7 @@ example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
 ------------------------------------------------------------------------------
 
 ==============================================================================
-2. global function                                      *vim-php-cs-fixer-def*
+2. 全局函数                                             *vim-php-cs-fixer-def*
 
 ------------------------------------------------------------------------------
 2.1 单文件修复函数                                          *PhpCsFixerFixFile*
@@ -86,7 +86,7 @@ example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
 ------------------------------------------------------------------------------
 
 ==============================================================================
-3. Mappings                                        *vim-php-cs-fixer-mappings*
+3. 映射                                            *vim-php-cs-fixer-mappings*
 
 ------------------------------------------------------------------------------
 3.1 单文件修复映射                                            *phpCsFixFileMap*
@@ -101,7 +101,7 @@ key bindings: `<leader>pcd`
 Note: 修复当前缓冲区文件所在的目录或标签目录（php 类型文件）
 
 ------------------------------------------------------------------------------
-3.3 remap                                                      *phpCsFixRemap*
+3.3 重新映射                                                   *phpCsFixRemap*
 
 这是一个简单的重新映射示例：
 
