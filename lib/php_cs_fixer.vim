@@ -7,14 +7,10 @@ var phpPath: string = get(g:, 'phpCsFixerPhpPath', 'php')
 var csIsVerbose: bool = get(g:, 'phpCsFixerIsVerbose', false)
 var csRules: string = get(g:, 'phpCsFixerRules', '@PSR12')
 var isDryRun: bool = get(g:, 'phpCsFixerIsDryRun', false)
-var csFixCacheDir: string = get(g:, 'phpCsFixerFixCacheDir', '')
+var csFixCacheDir: string = expand('~/.vim-php-cs-fixer/temp')
 
 # 检测并创建缓存临时目录
 def CheckAndCreateCacheDir()
-  if csFixCacheDir == ''
-    csFixCacheDir = expand(expand('<script>:h:h') .. '/temp')
-  endif
-
   if !isdirectory(csFixCacheDir)
     mkdir(csFixCacheDir, 'p')
   endif

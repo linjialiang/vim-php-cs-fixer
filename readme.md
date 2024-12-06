@@ -32,9 +32,6 @@ g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
 # default: '@PSR12'
 g:phpCsFixerRules = '@PhpCsFixer'
 
-# temporary file storage directory while repairing
-g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')
-
 # remap
 nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
 nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
@@ -75,13 +72,6 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     - example: `g:phpCsFixerRules = '@PhpCsFixer'`
 
     > Common Rule Group: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
-
-6. temporary file storage directory(absolute path required)
-
-    - default: `<{vim-php-cs-fixer}plug-in path>/temp`
-    - example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
-    - warning: This directory requires read and write permissions.
-      If it is a global plug-in, please set it to `777`.
 
 ## 2. global function
 

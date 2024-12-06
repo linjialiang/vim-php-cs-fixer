@@ -31,9 +31,6 @@ g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
 # 默认: '@PSR12'
 g:phpCsFixerRules = '@PhpCsFixer'
 
-# 临时文件存储目录，默认: vim-php-cs-fixer 插件的子目录 temp
-# g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')
-
 # 重新映射
 nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
 nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
@@ -74,12 +71,6 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     - 示例: `g:phpCsFixerRules = '@PhpCsFixer'`
 
     > 常见规则组: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
-
-6. 临时文件存储目录（需要绝对路径）
-
-    - 默认值: `<{vim-php-cs-fixer}插件路径>/temp`
-    - 示例: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
-    - 注意: 该目录需要读写权限，假如是全局插件请设为 `777`
 
 ## 二、全局函数
 

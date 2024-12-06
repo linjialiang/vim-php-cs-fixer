@@ -13,7 +13,6 @@ Note: 插件使用 `vim9script` 脚本语言实现，需要 `vim9.0` 以上版�
     1.3 --dry-run..................|phpCsFixerIsDryRun|
     1.4 --verbose..................|phpCsFixerIsVerbose|
     1.5 --rules....................|phpCsFixerRules|
-    1.6 临时文件存储目录...........|phpCsFixerFixCacheDir|
   2. 全局函数......................................|vim-php-cs-fixer-def|
     2.1.文件.......................|PhpCsFixerFixFile|
     2.2.目录.......................|PhpCsFixerFixDir|
@@ -61,13 +60,6 @@ default: `'$PSR12'`
 example: `g:phpCsFixerRules = '@PhpCsFixer'`
 
 常见规则组: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
-
-------------------------------------------------------------------------------
-1.6 临时文件存储目录                                   *phpCsFixerFixCacheDir*
-
-default:  `<{vim-php-cs-fixer}插件路径>/temp`
-example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
-warning: 该目录需要读写权限，假如是全局插件请设为 `777`
 
 ------------------------------------------------------------------------------
 
