@@ -105,34 +105,34 @@ Note: fix the directory where the current buffer file is located
 ------------------------------------------------------------------------------
 3.3 remap                                                      *phpCsFixRemap*
 
-you can remap, for example:
+you can remap, for example: >
 
-`nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;`
-`nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;`
-
+  nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+  nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+<
 Better mapping, if you have multiple code formatting tools, you can refer to
-      this way to write:
+      this way to write: >
 
-def g:RunCodeFormat()
-  # Prettier supports many file types, here you can add or delete file types
-  var prettierSupportTypes = [
-    'javascript',
-    'typescript',
-    'json',
-    'markdown',
-    'css',
-    'html'
-  ]
-  var currentFiletype = &filetype
-  if currentFiletype == 'php'
-    execute 'call PhpCsFixerFixFile()'
-  elseif prettierSupportTypes->index(currentFiletype) != -1
-    execute 'Prettier'
-  endif
-enddef
+  def g:RunCodeFormat()
+    # Prettier supports many file types, here you can add or delete file types
+    var prettierSupportTypes = [
+      'javascript',
+      'typescript',
+      'json',
+      'markdown',
+      'css',
+      'html'
+    ]
+    var currentFiletype = &filetype
+    if currentFiletype == 'php'
+      execute 'call PhpCsFixerFixFile()'
+    elseif prettierSupportTypes->index(currentFiletype) != -1
+      execute 'Prettier'
+    endif
+  enddef
 
-nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
-
+  nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
+<
 ------------------------------------------------------------------------------
 
 ==============================================================================

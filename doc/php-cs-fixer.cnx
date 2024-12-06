@@ -103,33 +103,33 @@ Note: 修复当前缓冲区文件所在的目录或标签目录（php 类型文�
 ------------------------------------------------------------------------------
 3.3 重新映射                                                   *phpCsFixRemap*
 
-这是一个简单的重新映射示例：
+这是一个简单的重新映射示例： >
 
-`nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;`
-`nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;`
+  nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
+  nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
+<
+更好的映射，如果你有多个代码格式化工具，可以参考下面这种方式： >
 
-更好的映射，如果你有多个代码格式化工具，可以参考下面这种方式：
+  def g:RunCodeFormat()
+    # Prettier supports many file types, here you can add or delete file types
+    var prettierSupportTypes = [
+      'javascript',
+      'typescript',
+      'json',
+      'markdown',
+      'css',
+      'html'
+    ]
+    var currentFiletype = &filetype
+    if currentFiletype == 'php'
+      execute 'call PhpCsFixerFixFile()'
+    elseif prettierSupportTypes->index(currentFiletype) != -1
+      execute 'Prettier'
+    endif
+  enddef
 
-def g:RunCodeFormat()
-  # Prettier supports many file types, here you can add or delete file types
-  var prettierSupportTypes = [
-    'javascript',
-    'typescript',
-    'json',
-    'markdown',
-    'css',
-    'html'
-  ]
-  var currentFiletype = &filetype
-  if currentFiletype == 'php'
-    execute 'call PhpCsFixerFixFile()'
-  elseif prettierSupportTypes->index(currentFiletype) != -1
-    execute 'Prettier'
-  endif
-enddef
-
-nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
-
+  nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
+<
 ------------------------------------------------------------------------------
 
 ==============================================================================
