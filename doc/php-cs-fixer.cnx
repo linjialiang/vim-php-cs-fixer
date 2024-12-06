@@ -65,8 +65,9 @@ example: `g:phpCsFixerRules = '@PhpCsFixer'`
 ------------------------------------------------------------------------------
 1.6 临时文件存储目录                                   *phpCsFixerFixCacheDir*
 
-default: vim-php-cs-fixer 插件子目录 temp 的路径
+default:  `<{vim-php-cs-fixer}插件路径>/temp`
 example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
+warning: 该目录需要读写权限，假如是全局插件请设为 `777`
 
 ------------------------------------------------------------------------------
 

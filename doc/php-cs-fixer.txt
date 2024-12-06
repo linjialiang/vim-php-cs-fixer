@@ -66,8 +66,10 @@ Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
 ------------------------------------------------------------------------------
 1.6 temporary file storage directory                   *phpCsFixerFixCacheDir*
 
-default: vim-php-cs-fixer path to temp plugin subdirectory
+default: `<{vim-php-cs-fixer}plug-in path>/temp`
 example: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
+warning: This directory requires read and write permissions.
+      If it is a global plug-in, please set it to `777`.
 
 ------------------------------------------------------------------------------
 

@@ -77,8 +77,9 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
 
 6. 临时文件存储目录（需要绝对路径）
 
-    - 默认值: vim-php-cs-fixer 插件子目录 temp 的路径
+    - 默认值: `<{vim-php-cs-fixer}插件路径>/temp`
     - 示例: `g:phpCsFixerFixCacheDir = expand('~/.php-cs-fixer/vim-fix-cache')`
+    - 注意: 该目录需要读写权限，假如是全局插件请设为 `777`
 
 ## 二、全局函数
 
