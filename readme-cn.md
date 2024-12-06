@@ -134,6 +134,20 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
     ```
 
+## 安装
+
+<details>
+<summary>Vim 8+ packages</summary>
+
+如果您使用的是 Vim 版本 8 或更高版本，您可以使用其内置的包管理;请参阅 `:help packages` 以获取更多信息。在你的终端上运行这些命令：
+
+```bash
+git clone https://github.com/linjialiang/vim-php-cs-fixer.git <vimfilesPath>/pack/store/start/vim-php-cs-fixer
+vim -u NONE -c "helptags <vimfilesPath>/pack/store/start/vim-php-cs-fixer/doc" -c q
+```
+
+</details>
+
 ## 项目地址：
 
 -   GitHub: https://github.com/linjialiang/vim-php-cs-fixer.git

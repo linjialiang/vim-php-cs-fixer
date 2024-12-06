@@ -135,6 +135,20 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     nnoremap <silent><Leader>f :call g:RunCodeFormat()<CR>
     ```
 
+## Install
+
+<details>
+<summary>Vim 8+ packages</summary>
+
+If you are using Vim version 8 or higher you can use its built-in package management; see `:help packages` for more information. Just run these commands in your terminal:
+
+```bash
+git clone https://github.com/linjialiang/vim-php-cs-fixer.git <vimfilesPath>/pack/store/start/vim-php-cs-fixer
+vim -u NONE -c "helptags <vimfilesPath>/pack/store/start/vim-php-cs-fixer/doc" -c q
+```
+
+</details>
+
 ## source address：
 
 -   GitHub: https://github.com/linjialiang/vim-php-cs-fixer.git
