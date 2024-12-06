@@ -8,6 +8,7 @@ var csIsVerbose: bool = get(g:, 'phpCsFixerIsVerbose', false)
 var csRules: string = get(g:, 'phpCsFixerRules', '@PSR12')
 var isDryRun: bool = get(g:, 'phpCsFixerIsDryRun', false)
 var csFixCacheDir: string = expand('~/.vim-php-cs-fixer/temp')
+var isIgnoreEnv: bool = get(g:, 'phpCsFixerIgnoreEnv', false)
 
 # 检测并创建缓存临时目录
 def CheckAndCreateCacheDir()
@@ -29,6 +30,14 @@ def Fix(path: string, isDryRunMode: bool = false, isReloadFile: bool = true): bo
   endif
 
   var command = $"{phpPath} {csPath} fix {path} --rules={csRules} --using-cache=no"
+
+  if isIgnoreEnv
+    if has('unix')
+      command = 'PHP_CS_FIXER_IGNORE_ENV=1 ' .. command
+    elseif has('win32') || has('win64')
+      command = 'set PHP_CS_FIXER_IGNORE_ENV=1 && ' .. command
+    endif
+  endif
 
   if csIsVerbose
     command ..= ' --verbose'
@@ -118,17 +127,29 @@ export def FixFile()
     var isOpenFile: bool = !empty(bufname('%'))
     # 先将缓冲区内容保存至其他文件
     var fixFilePath = expand(csFixCacheDir .. '/' .. strftime('%Y%m%d%H%M%S') .. rand() .. '.php')
-    # TODO 暂时无解的问题
-    # 这里有个提示问题，缓冲区没有文件时，当前缓冲区打开的文件为临时文件
-    # -- 后面的 delete(fixFilePath) 在删除打开文件时，窗口会报错
     execute $"silent write {fixFilePath}"
     if filereadable(fixFilePath)
       var result = Fix(fixFilePath, isDryRun, false)
       if result
-        # 清空缓冲区
-        execute 'silent :%d'
+        # 获取当前缓冲区编号，未打开文件的缓冲区，需删除后重新载入
+        var currentBufferId = bufnr()
+        if isOpenFile
+          # 清空缓冲区
+          execute 'silent :%d'
+        else
+          # 删除缓冲区
+          execute $"silent :bdelete {currentBufferId}"
+        endif
         # 载入修复后的缓存文件
         execute $"silent :0read {fixFilePath}"
+        # 缓冲区结尾出现若干空白行时，手动删除
+        while getline('$') =~ '^\s*$'
+          execute 'silent :$d'
+        endwhile
+        # 未打开文件的空缓冲区需要重新设置文件类型
+        if &filetype == ''
+          execute 'silent :set filetype=php'
+        endif
       endif
       silent delete(fixFilePath)
     else
