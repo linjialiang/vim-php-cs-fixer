@@ -12,13 +12,18 @@
 
 ```vim
 vim9script
-# php解释器路径(默认: 'php')
-# php解释器所在目录加入环境变量后，无需设置此项
-g:phpCsFixerPhpPath = expand('~/php')
-
 # php-cs-fixer 文件路径(必须)
 # 官网下载: https://cs.symfony.com/
 g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
+
+# 应用规则，内容跟 PHP CS Fixer 的 --rules 选项保持一致
+# 常见规则组 @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+# 默认: '@PSR12'
+g:phpCsFixerRules = '@PhpCsFixer'
+
+# php解释器路径(默认: 'php')
+# php解释器所在目录加入环境变量后，无需设置此项
+# g:phpCsFixerPhpPath = expand('~/php')
 
 # --dry-run 选项(默认: false)
 # g:phpCsFixerIsDryRun = true
@@ -26,10 +31,9 @@ g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
 # --verbose 选项(默认: false)
 # g:phpCsFixerIsVerbose = true
 
-# 应用规则，内容跟 PHP CS Fixer 的 --rules 选项保持一致
-# 常见规则组 @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
-# 默认: '@PSR12'
-g:phpCsFixerRules = '@PhpCsFixer'
+# PHP_CS_FIXER_IGNORE_ENV 是否启用环境忽略
+# 在不兼容的php版本或缺少扩展的情况下，请启用
+# g:phpCsFixerIgnoreEnv = true
 
 # 重新映射
 nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
@@ -71,6 +75,12 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     - 示例: `g:phpCsFixerRules = '@PhpCsFixer'`
 
     > 常见规则组: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
+
+6. PHP_CS_FIXER_IGNORE_ENV
+
+    - 说明: 在不兼容的 php 版本或缺少扩展的情况下，如果不启用，php-cs-fixer 将无法工作
+    - 默认值: `false`
+    - 示例: `g:phpCsFixerIgnoreEnv = true`
 
 ## 二、全局函数
 

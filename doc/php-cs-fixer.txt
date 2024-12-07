@@ -14,6 +14,7 @@ Navigation
     1.3 --dry-run..................|phpCsFixerIsDryRun|
     1.4 --verbose..................|phpCsFixerIsVerbose|
     1.5 --rules....................|phpCsFixerRules|
+    1.6 PHP_CS_FIXER_IGNORE_ENV....|phpCsFixerIgnoreEnv|
   2. global function...............................|vim-php-cs-fixer-def|
     2.1.file.......................|PhpCsFixerFixFile|
     2.2.directory..................|PhpCsFixerFixDir|
@@ -61,6 +62,14 @@ default: `'$PSR12'`
 example: `g:phpCsFixerRules = '@PhpCsFixer'`
 
 Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+
+------------------------------------------------------------------------------
+1.6 PHP_CS_FIXER_IGNORE_ENV                              *phpCsFixerIgnoreEnv*
+
+Note: If not enabled in incompatible PHP versions or missing extensions,
+	PHP CS fixer will not work
+default: `false`
+example: `g:phpCsFixerIgnoreEnv = true`
 
 ------------------------------------------------------------------------------
 

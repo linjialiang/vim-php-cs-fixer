@@ -14,12 +14,17 @@ on `.vimrc` you can configure this:
 
 ```vim
 vim9script
-# php interpreter path(default: 'php')
-g:phpCsFixerPhpPath = expand('~/php')
-
 # php-cs-fixer file path(must)
 # download: https://cs.symfony.com/
 g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
+
+# apply rules, content consistent with PHP CS Fixer --rules option
+# Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
+# default: '@PSR12'
+g:phpCsFixerRules = '@PhpCsFixer'
+
+# php interpreter path(default: 'php')
+# g:phpCsFixerPhpPath = expand('~/php')
 
 # --dry-run option(default: false)
 # g:phpCsFixerIsDryRun = true
@@ -27,10 +32,9 @@ g:phpCsFixerPath = expand('~/php/php-cs-fixer-v3.phar')
 # --verbose option(default: false)
 # g:phpCsFixerIsVerbose = true
 
-# apply rules, content consistent with PHP CS Fixer --rules option
-# Common Rule Group: @PSR2,@PSR12,@PER-CS,@Symfony,@PhpCsFixer
-# default: '@PSR12'
-g:phpCsFixerRules = '@PhpCsFixer'
+# enable environment ignore (PHP_CS_FIXER_IGNORE_ENV)
+# enable in case of incompatible php versions or missing extensions
+# g:phpCsFixerIgnoreEnv = true
 
 # remap
 nnoremap <unique><silent><Leader>f <Plug>PhpCsFixerFixFile;
@@ -72,6 +76,12 @@ nnoremap <unique><silent><Leader>d <Plug>PhpCsFixerFixDir;
     - example: `g:phpCsFixerRules = '@PhpCsFixer'`
 
     > Common Rule Group: `@PSR2`,`@PSR12`,`@PER-CS`,`@Symfony`,`@PhpCsFixer`
+
+6. PHP_CS_FIXER_IGNORE_ENV
+
+    - Note: If not enabled in incompatible PHP versions or missing extensions, PHP CS fixer will not work
+    - default: `false`
+    - example: `g:phpCsFixerIgnoreEnv = true`
 
 ## 2. global function
 
