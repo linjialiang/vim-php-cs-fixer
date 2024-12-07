@@ -32,10 +32,10 @@ def Fix(path: string, isDryRunMode: bool = false, isReloadFile: bool = true): bo
   var command = $"{phpPath} {csPath} fix {path} --rules={csRules} --using-cache=no"
 
   if isIgnoreEnv
-    if has('unix')
-      command = 'PHP_CS_FIXER_IGNORE_ENV=1 ' .. command
-    elseif has('win32') || has('win64')
+    if has('win32') || has('win64')
       command = 'set PHP_CS_FIXER_IGNORE_ENV=1 && ' .. command
+    else
+      command = 'PHP_CS_FIXER_IGNORE_ENV=1 ' .. command
     endif
   endif
 
@@ -157,4 +157,3 @@ export def FixFile()
     endif
   endif
 enddef
-
